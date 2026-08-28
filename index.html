@@ -38,7 +38,7 @@
     background:
       radial-gradient(ellipse 80% 50% at 50% -10%, rgba(139,92,246,0.16), transparent 60%),
       radial-gradient(ellipse 60% 40% at 85% 15%, rgba(43,233,233,0.10), transparent 60%),
-      radial-gradient(ellipse 70% 50% at 10% 90%,g rgba(139,92,246,0.10), transparent 60%),
+      radial-gradient(ellipse 70% 50% at 10% 90%, rgba(139,92,246,0.10), transparent 60%),
       var(--bg);
     color:var(--text);
     font-family:var(--font-body);
@@ -68,6 +68,7 @@
 
   a{color:inherit;}
 
+  /* Scrollbar */
   ::-webkit-scrollbar{width:10px;}
   ::-webkit-scrollbar-track{background:var(--bg);}
   ::-webkit-scrollbar-thumb{background:linear-gradient(var(--cyan), var(--violet)); border-radius:10px;}
@@ -80,6 +81,7 @@
     z-index:1;
   }
 
+  /* ============ BANNER AD SLOTS ============ */
   .ad-slot{
     width:100%;
     border:1px dashed var(--border);
@@ -98,6 +100,7 @@
   .ad-slot.mid{height:90px;}
   .ad-slot.footer{height:64px; margin-top:50px;}
 
+  /* ============ TOP SPIRE ============ */
   .spire-stage{
     height:200px;
     display:flex;
@@ -155,6 +158,7 @@
     to{ transform:translateX(-50%) rotate(360deg); }
   }
 
+  /* ============ HEADER ============ */
   .masthead{
     text-align:center;
     padding:10px 0 4px;
@@ -188,6 +192,7 @@
     margin-left:auto; margin-right:auto;
   }
 
+  /* ============ GLASS PANEL BASE ============ */
   .panel{
     background:var(--glass);
     border:1px solid var(--border);
@@ -219,6 +224,7 @@
     box-shadow:0 0 8px 2px var(--cyan);
   }
 
+  /* ============ VAULT / LOCK SCREEN ============ */
   #vaultScreen{
     max-width:460px;
     margin:40px auto 0;
@@ -331,6 +337,7 @@
   }
   .hidden{ display:none !important; }
 
+  /* ============ DASHBOARD ============ */
   #dashboard{ margin-top:34px; }
 
   .top-row{
@@ -343,6 +350,7 @@
     .top-row{ grid-template-columns:1fr; }
   }
 
+  /* Profile card */
   .profile-card{
     padding:26px 22px;
     display:flex;
@@ -402,6 +410,7 @@
     margin-top:10px;
   }
 
+  /* Ticker panel */
   .ticker-card{
     padding:26px 26px;
     display:flex;
@@ -441,6 +450,7 @@
     margin-top:6px;
   }
 
+  /* ============ SECTION HEADS ============ */
   .section-head{
     display:flex;
     align-items:center;
@@ -461,6 +471,7 @@
     background:linear-gradient(90deg, var(--border-bright), transparent);
   }
 
+  /* ============ GRID CARDS ============ */
   .grid{
     display:grid;
     gap:16px;
@@ -507,6 +518,7 @@
     color:var(--text-dimmer);
   }
 
+  /* ============ PROGRESS BARS ============ */
   .progress-card{ padding:22px; }
   .progress-top{
     display:flex;
@@ -570,6 +582,7 @@
     margin-top:4px;
   }
 
+  /* ============ WISDOM BOX ============ */
   .wisdom-card{
     padding:28px 30px;
     text-align:center;
@@ -598,6 +611,7 @@
     color:var(--text-dimmer);
   }
 
+  /* ============ SHARE BUTTON ============ */
   .share-row{
     display:flex;
     justify-content:center;
@@ -610,6 +624,7 @@
     border-radius:100px;
   }
 
+  /* ============ TOAST ============ */
   #toast{
     position:fixed;
     bottom:30px;
@@ -663,8 +678,10 @@
 
 <div class="wrap">
 
+  <!-- HEADER BANNER AD SLOT -->
   <div class="ad-slot header">Advertisement · 728×90</div>
 
+  <!-- TOP PULSING SPIRE -->
   <div class="spire-stage">
     <div class="spire-ring r2"></div>
     <div class="spire-ring r1"></div>
@@ -678,6 +695,7 @@
     <p class="subtitle">Lifetime Matrix Engine — decode your existence into cosmic data, live time streams, and planetary years.</p>
   </div>
 
+  <!-- ============ VAULT / SETUP SCREEN ============ -->
   <div id="vaultScreen" class="panel">
     <div class="vault-icon">🔒</div>
     <h2 id="vaultTitle">Initialize Your Matrix</h2>
@@ -711,230 +729,174 @@
     </div>
   </div>
 
+  <!-- ============ DASHBOARD ============ -->
   <div id="dashboard" class="hidden">
 
     <div class="top-row">
-      <div class="panel profile-card">
-        <div class="panel-label" style="align-self:flex-start;">
-          <span class="dot"></span> SUBJECT DATA
-        </div>
-        
+      <!-- PROFILE CARD -->
+      <div class="profile-card panel">
         <div class="avatar-frame">
           <div class="avatar-frame-inner">
-            <img id="userPhoto" src="https://i.ibb.co/6y4G62Z/avatar.jpg" alt="Personal Avatar">
+            <!-- INSERT YOUR PERSONAL PHOTO URL HERE -->
+            <img id="avatarImg" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400" alt="User avatar">
           </div>
         </div>
-
-        <div>
-          <div class="profile-name" id="dispName">Nova Rae</div>
-          <div class="profile-bday" id="dispBday">Birth Coordinates Locked</div>
-        </div>
-
-        <div class="profile-zodiac" id="dispZodiac">
-          <span>✨</span> <span id="zodiacText">Calculating Sign...</span>
-        </div>
-
+        <div class="profile-name" id="profileName">—</div>
+        <div class="profile-zodiac" id="profileZodiac">♈ —</div>
+        <div class="profile-bday" id="profileBday">—</div>
         <div class="profile-actions">
-          <button class="btn ghost small" id="btnRelock">🔒 Lock</button>
-          <button class="btn ghost small danger" id="btnResetAll">↻ Reset</button>
+          <button class="btn ghost small" id="btnLock" style="flex:1;">🔒 Lock Vault</button>
+          <button class="btn ghost small" id="btnReset2" style="flex:1;">↺ Reset</button>
         </div>
       </div>
 
-      <div class="panel ticker-card">
-        <div class="panel-label">
-          <span class="dot"></span> LIVE TEMPORAL CHRONOMETER
-        </div>
-        
+      <!-- LIVE TICKER -->
+      <div class="ticker-card panel">
+        <div class="panel-label"><span class="dot"></span> LIVE TIME SIGNATURE — SINCE BIRTH</div>
         <div class="ticker-grid">
-          <div class="ticker-unit">
-            <div class="ticker-num" id="tickYears">00</div>
-            <div class="ticker-lbl">Years</div>
-          </div>
-          <div class="ticker-unit">
-            <div class="ticker-num" id="tickMonths">00</div>
-            <div class="ticker-lbl">Months</div>
-          </div>
-          <div class="ticker-unit">
-            <div class="ticker-num" id="tickDays">00</div>
-            <div class="ticker-lbl">Days</div>
-          </div>
-          <div class="ticker-unit">
-            <div class="ticker-num" id="tickHours">00</div>
-            <div class="ticker-lbl">Hours</div>
-          </div>
-          <div class="ticker-unit">
-            <div class="ticker-num" id="tickMins">00</div>
-            <div class="ticker-lbl">Minutes</div>
-          </div>
-          <div class="ticker-unit">
-            <div class="ticker-num" id="tickSecs">00</div>
-            <div class="ticker-lbl">Seconds</div>
-          </div>
+          <div class="ticker-unit"><div class="ticker-num" id="tYears">0</div><div class="ticker-lbl">Years</div></div>
+          <div class="ticker-unit"><div class="ticker-num" id="tMonths">0</div><div class="ticker-lbl">Months</div></div>
+          <div class="ticker-unit"><div class="ticker-num" id="tDays">0</div><div class="ticker-lbl">Days</div></div>
+          <div class="ticker-unit"><div class="ticker-num" id="tHours">0</div><div class="ticker-lbl">Hours</div></div>
+          <div class="ticker-unit"><div class="ticker-num" id="tMinutes">0</div><div class="ticker-lbl">Mins</div></div>
+          <div class="ticker-unit"><div class="ticker-num" id="tSeconds">0</div><div class="ticker-lbl">Secs</div></div>
         </div>
       </div>
     </div>
 
-    <div class="ad-slot mid">Advertisement · 970×90 / 728×90</div>
-
-    <div class="section-head">
-      <h2>Cosmic & Planetary Engine</h2>
-      <div class="rule"></div>
+    <!-- DAILY WISDOM -->
+    <div class="section-head"><h2>Daily Cosmic Wisdom</h2><div class="rule"></div></div>
+    <div class="wisdom-card panel">
+      <div class="wisdom-glyph">✦</div>
+      <div class="wisdom-text" id="wisdomText">Loading transmission…</div>
+      <div class="wisdom-date" id="wisdomDate">—</div>
     </div>
 
+    <!-- MID BANNER AD -->
+    <div class="ad-slot mid">Advertisement · 468×60</div>
+
+    <!-- LIFETIME ANALYTICS -->
+    <div class="section-head"><h2>Lifetime Analytics</h2><div class="rule"></div></div>
     <div class="grid cols-4">
-      <div class="panel stat-card">
-        <div class="panel-label"><span class="dot"></span> MARS AGE</div>
-        <div class="stat-icon">🔴</div>
-        <div class="stat-value cyan-txt" id="statMars">0.00</div>
-        <div class="stat-sub">Mars orbits the sun every 687 Earth days.</div>
-      </div>
-
-      <div class="panel stat-card">
-        <div class="panel-label"><span class="dot"></span> JUPITER AGE</div>
-        <div class="stat-icon">🪐</div>
-        <div class="stat-value violet-txt" id="statJupiter">0.00</div>
-        <div class="stat-sub">1 Jupiter year equals ~11.86 Earth years.</div>
-      </div>
-
-      <div class="panel stat-card">
-        <div class="panel-label"><span class="dot"></span> SPACE TRAVEL</div>
-        <div class="stat-icon">🚀</div>
-        <div class="stat-value" id="statDistance">0 km</div>
-        <div class="stat-sub">Distance moved through space around the Sun.</div>
-      </div>
-
-      <div class="panel stat-card">
-        <div class="panel-label"><span class="dot"></span> BIRTH MOON PHASE</div>
-        <div class="stat-icon" id="statMoonIcon">🌕</div>
-        <div class="stat-value" id="statMoonName" style="font-size:18px; margin-top:4px;">Full Moon</div>
-        <div class="stat-sub" id="statMoonSub">Lunar phase on your birthday.</div>
-      </div>
-    </div>
-
-    <div class="section-head">
-      <h2>Lifetime Cumulative Analytics</h2>
-      <div class="rule"></div>
-    </div>
-
-    <div class="grid cols-4">
-      <div class="panel stat-card">
+      <div class="stat-card panel">
+        <div class="stat-icon">📆</div>
         <div class="stat-title">Total Days Lived</div>
-        <div class="stat-value cyan-txt" id="statTotalDays">0</div>
-        <div class="stat-sub">Solar days elapsed on Earth.</div>
+        <div class="stat-value cyan-txt" id="statDays">0</div>
+        <div class="stat-sub">Every sunrise counted.</div>
       </div>
-
-      <div class="panel stat-card">
+      <div class="stat-card panel">
+        <div class="stat-icon">🗓️</div>
         <div class="stat-title">Total Weeks Lived</div>
-        <div class="stat-value" id="statTotalWeeks">0</div>
-        <div class="stat-sub">Complete weeks on your timeline.</div>
+        <div class="stat-value" id="statWeeks">0</div>
+        <div class="stat-sub">Full 7-day cycles completed.</div>
       </div>
-
-      <div class="panel stat-card">
+      <div class="stat-card panel">
+        <div class="stat-icon">⏱️</div>
         <div class="stat-title">Total Hours Lived</div>
-        <div class="stat-value" id="statTotalHours">0</div>
-        <div class="stat-sub">Hours spent exploring reality.</div>
+        <div class="stat-value violet-txt" id="statHours">0</div>
+        <div class="stat-sub">Time in its rawest unit.</div>
       </div>
-
-      <div class="panel stat-card">
+      <div class="stat-card panel">
+        <div class="stat-icon">💓</div>
         <div class="stat-title">Estimated Heartbeats</div>
-        <div class="stat-value violet-txt" id="statHeartbeats">0</div>
-        <div class="stat-sub">Based on an average ~80 BPM.</div>
+        <div class="stat-value" id="statHeartbeats">0</div>
+        <div class="stat-sub">Calculated at 80 BPM average.</div>
       </div>
     </div>
 
-    <div class="section-head">
-      <h2>Milestones & Temporal Progress</h2>
-      <div class="rule"></div>
+    <!-- COSMIC ENGINE -->
+    <div class="section-head"><h2>Cosmic &amp; Planetary Engine</h2><div class="rule"></div></div>
+    <div class="grid cols-4">
+      <div class="stat-card panel">
+        <div class="stat-icon">🔴</div>
+        <div class="stat-title">Age on Mars</div>
+        <div class="stat-value cyan-txt" id="statMars">0.00</div>
+        <div class="stat-sub">Red Planet years (686.98 Earth days each).</div>
+      </div>
+      <div class="stat-card panel">
+        <div class="stat-icon">🟠</div>
+        <div class="stat-title">Age on Jupiter</div>
+        <div class="stat-value violet-txt" id="statJupiter">0.00</div>
+        <div class="stat-sub">Gas Giant years (11.86 Earth years each).</div>
+      </div>
+      <div class="stat-card panel">
+        <div class="stat-icon">🌌</div>
+        <div class="stat-title">Space Traveled</div>
+        <div class="stat-value" id="statDistance">0</div>
+        <div class="stat-sub">Km through the cosmos via Earth's solar orbit (~107,200 km/h).</div>
+      </div>
+      <div class="stat-card panel">
+        <div class="stat-icon" id="moonEmoji">🌙</div>
+        <div class="stat-title">Birth Moon Phase</div>
+        <div class="stat-value cyan-txt" id="statMoon" style="font-size:17px;">—</div>
+        <div class="stat-sub">The lunar face that greeted your first breath.</div>
+      </div>
     </div>
 
-    <div class="grid cols-2">
-      <div class="panel progress-card">
-        <div class="progress-top">
-          <div class="p-title">Current Year Completion</div>
-          <div class="p-pct" id="yearProgressPct">0.0%</div>
-        </div>
-        <div class="progress-track">
-          <div class="progress-fill" id="yearProgressBar" style="width: 0%;"></div>
-        </div>
-        <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-dimmer); margin-top:12px;">
-          Tracking percentage of the active calendar year elapsed.
-        </div>
+    <!-- ZODIAC -->
+    <div class="grid cols-2" style="margin-top:16px;">
+      <div class="stat-card panel">
+        <div class="stat-icon" id="zodiacGlyphBig">♈</div>
+        <div class="stat-title">Astrological Zodiac Sign</div>
+        <div class="stat-value cyan-txt" id="statZodiacName">—</div>
+        <div class="stat-sub" id="statZodiacDates">—</div>
+      </div>
+      <div class="stat-card panel">
+        <div class="stat-icon">🌍</div>
+        <div class="stat-title">Universe Journey Summary</div>
+        <div class="stat-value violet-txt" style="font-size:16px;" id="statUniverseSummary">—</div>
+        <div class="stat-sub">Combined solar-orbit + galactic drift estimate.</div>
+      </div>
+    </div>
+
+    <!-- PROGRESS TRACKERS -->
+    <div class="section-head"><h2>Progress &amp; Milestones</h2><div class="rule"></div></div>
+    <div class="grid cols-3">
+      <div class="progress-card panel">
+        <div class="progress-top"><span class="p-title">Current Year Completed</span><span class="p-pct" id="yearPct">0%</span></div>
+        <div class="progress-track"><div class="progress-fill" id="yearFill" style="width:0%"></div></div>
+        <div class="stat-sub" style="margin-top:10px;" id="yearSub">—</div>
       </div>
 
-      <div class="panel progress-card">
-        <div class="progress-top">
-          <div class="p-title">Next Birthday Countdown</div>
-          <div class="p-pct" id="bdayTurningText" style="font-size:15px; color:var(--violet);">Turning --</div>
-        </div>
+      <div class="progress-card panel">
+        <div class="progress-top"><span class="p-title">Next Birthday Countdown</span><span class="p-pct" id="bdayDaysLeft">0d</span></div>
         <div class="countdown-grid">
-          <div class="countdown-unit">
-            <div class="countdown-num" id="cdDays">00</div>
-            <div class="countdown-lbl">Days</div>
-          </div>
-          <div class="countdown-unit">
-            <div class="countdown-num" id="cdHours">00</div>
-            <div class="countdown-lbl">Hours</div>
-          </div>
-          <div class="countdown-unit">
-            <div class="countdown-num" id="cdMins">00</div>
-            <div class="countdown-lbl">Mins</div>
-          </div>
-          <div class="countdown-unit">
-            <div class="countdown-num" id="cdSecs">00</div>
-            <div class="countdown-lbl">Secs</div>
-          </div>
+          <div class="countdown-unit"><div class="countdown-num" id="bdD">0</div><div class="countdown-lbl">Days</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="bdH">0</div><div class="countdown-lbl">Hrs</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="bdM">0</div><div class="countdown-lbl">Min</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="bdS">0</div><div class="countdown-lbl">Sec</div></div>
         </div>
       </div>
-    </div>
 
-    <div class="section-head">
-      <h2>Daily Cosmic Wisdom</h2>
-      <div class="rule"></div>
-    </div>
-
-    <div class="panel wisdom-card">
-      <div class="wisdom-glyph">🧘‍♂️</div>
-      <div class="wisdom-text" id="wisdomQuote">
-        "Time is not a stream that drags us along, but a cosmic matrix through which we expand. Every heartbeat is a coordinate written in stardust."
+      <div class="progress-card panel">
+        <div class="progress-top"><span class="p-title">10,000 Days Alive Milestone</span><span class="p-pct" id="milestonePct">0%</span></div>
+        <div class="progress-track"><div class="progress-fill" id="milestoneFill" style="width:0%"></div></div>
+        <div class="stat-sub" style="margin-top:10px;" id="milestoneSub">—</div>
       </div>
-      <div class="wisdom-date" id="wisdomDate">TRANSMISSION ACTIVE · TODAY</div>
     </div>
 
+    <!-- SHARE -->
     <div class="share-row">
-      <button class="btn share-btn" id="btnShareStats">
-        ✨ Share Matrix Stats
-      </button>
+      <button class="btn share-btn" id="btnShare">📡 Share Matrix Stats</button>
     </div>
 
   </div>
 
+  <!-- FOOTER BANNER AD -->
   <div class="ad-slot footer">Advertisement · 728×90</div>
 
-  <footer class="foot">
-    <p>CHRONOX : LIFETIME MATRIX ENGINE &copy; 2026 · ALL RIGHTS RESERVED</p>
-  </footer>
-
+  <footer class="foot">CHRONOX LIFETIME MATRIX ENGINE — ALL DATA STORED LOCALLY ON YOUR DEVICE</footer>
 </div>
 
-<div id="toast">
-  <span class="glow-dot"></span>
-  <span id="toastMsg">Matrix Stats Copied to Clipboard!</span>
-</div>
+<div id="toast"><span class="glow-dot"></span><span id="toastMsg">Matrix Stats Copied!</span></div>
 
 <script>
-  const STORAGE_KEY = "chronox_user_vault_v1";
+(function(){
 
-  const quotes = [
-    "Time is not a stream that drags us along, but a cosmic matrix through which we expand. Every heartbeat is a coordinate written in stardust.",
-    "Do not count the solar orbits elapsed; make every single revolution around the sun reverberate through the cosmos.",
-    "You are a rare biological engine witnessing an infinite universe. Cherish every millisecond of this temporal simulation.",
-    "Yesterday is an unalterable memory node. Tomorrow is a quantum probability. Today is your active execution thread.",
-    "The stars you gaze at tonight have traveled millions of light-years just to meet your timeline."
-  ];
+  const STORAGE_KEY = 'chronox_vault_v1';
+  let liveTimer = null;
 
-  let userData = null;
-  let timerInterval = null;
-
+  // ---------- ELEMENT REFS ----------
   const vaultScreen = document.getElementById('vaultScreen');
   const dashboard = document.getElementById('dashboard');
   const setupForm = document.getElementById('setupForm');
@@ -942,173 +904,230 @@
   const vaultTitle = document.getElementById('vaultTitle');
   const vaultDesc = document.getElementById('vaultDesc');
 
-  const inputName = document.getElementById('inputName');
-  const inputDob = document.getElementById('inputDob');
-  const inputPin = document.getElementById('inputPin');
-  const setupError = document.getElementById('setupError');
+  // ---------- UTIL: simple obfuscation (NOT real encryption) ----------
+  function encode(str){ return btoa(unescape(encodeURIComponent(str))); }
+  function decode(str){ return decodeURIComponent(escape(atob(str))); }
 
-  const inputUnlockPin = document.getElementById('inputUnlockPin');
-  const unlockError = document.getElementById('unlockError');
+  function getVault(){
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return null;
+    try{ return JSON.parse(decode(raw)); }catch(e){ return null; }
+  }
+  function saveVault(data){
+    localStorage.setItem(STORAGE_KEY, encode(JSON.stringify(data)));
+  }
+  function clearVault(){
+    localStorage.removeItem(STORAGE_KEY);
+  }
 
-  const dispName = document.getElementById('dispName');
-  const dispBday = document.getElementById('dispBday');
-  const zodiacText = document.getElementById('zodiacText');
+  // ---------- INIT SCREEN LOGIC ----------
+  function initScreen(){
+    const existing = getVault();
+    if(existing){
+      vaultTitle.textContent = 'Vault Locked';
+      vaultDesc.textContent = 'Your matrix data is secured locally. Enter your ChronoKey PIN to unlock.';
+      setupForm.classList.add('hidden');
+      unlockForm.classList.remove('hidden');
+    } else {
+      vaultTitle.textContent = 'Initialize Your Matrix';
+      vaultDesc.textContent = 'Enter your identity and birth coordinates to generate your lifetime matrix. Secure it locally with a ChronoKey PIN.';
+      setupForm.classList.remove('hidden');
+      unlockForm.classList.add('hidden');
+    }
+  }
+  initScreen();
 
-  const tickYears = document.getElementById('tickYears');
-  const tickMonths = document.getElementById('tickMonths');
-  const tickDays = document.getElementById('tickDays');
-  const tickHours = document.getElementById('tickHours');
-  const tickMins = document.getElementById('tickMins');
-  const tickSecs = document.getElementById('tickSecs');
+  document.getElementById('btnInitialize').addEventListener('click', function(){
+    const name = document.getElementById('inputName').value.trim();
+    const dob = document.getElementById('inputDob').value;
+    const pin = document.getElementById('inputPin').value.trim();
+    const err = document.getElementById('setupError');
+    err.textContent = '';
 
-  const statMars = document.getElementById('statMars');
-  const statJupiter = document.getElementById('statJupiter');
-  const statDistance = document.getElementById('statDistance');
-  const statMoonIcon = document.getElementById('statMoonIcon');
-  const statMoonName = document.getElementById('statMoonName');
-  const statTotalDays = document.getElementById('statTotalDays');
-  const statTotalWeeks = document.getElementById('statTotalWeeks');
-  const statTotalHours = document.getElementById('statTotalHours');
-  const statHeartbeats = document.getElementById('statHeartbeats');
+    if(!name){ err.textContent = 'Please enter a callsign or name.'; return; }
+    if(!dob){ err.textContent = 'Please select your birth date & time.'; return; }
+    if(new Date(dob).getTime() > Date.now()){ err.textContent = 'Birth date cannot be in the future.'; return; }
+    if(!/^\d{4,6}$/.test(pin)){ err.textContent = 'PIN must be 4–6 digits.'; return; }
 
-  const yearProgressPct = document.getElementById('yearProgressPct');
-  const yearProgressBar = document.getElementById('yearProgressBar');
-  const cdDays = document.getElementById('cdDays');
-  const cdHours = document.getElementById('cdHours');
-  const cdMins = document.getElementById('cdMins');
-  const cdSecs = document.getElementById('cdSecs');
-  const bdayTurningText = document.getElementById('bdayTurningText');
-
-  const wisdomQuote = document.getElementById('wisdomQuote');
-  const toast = document.getElementById('toast');
-  const toastMsg = document.getElementById('toastMsg');
-
-  window.addEventListener('DOMContentLoaded', () => {
-    const now = new Date();
-    const tzOffset = now.getTimezoneOffset() * 60000;
-    const localISOTime = (new Date(Date.now() - tzOffset)).toISOString().slice(0, 16);
-    inputDob.max = localISOTime;
-
-    const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
-    wisdomQuote.textContent = `"${quotes[dayOfYear % quotes.length]}"`;
-
-    checkVault();
+    const data = { name: name, dob: dob, pin: pin };
+    saveVault(data);
+    launchDashboard(data);
   });
 
-  function checkVault() {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      try {
-        userData = JSON.parse(stored);
-        showUnlockScreen();
-      } catch (e) {
-        showSetupScreen();
+  document.getElementById('btnUnlock').addEventListener('click', function(){
+    const pin = document.getElementById('inputUnlockPin').value.trim();
+    const err = document.getElementById('unlockError');
+    const vault = getVault();
+    if(!vault){ err.textContent = 'No vault found.'; return; }
+    if(pin !== vault.pin){
+      err.textContent = 'Incorrect ChronoKey PIN.';
+      return;
+    }
+    err.textContent = '';
+    launchDashboard(vault);
+  });
+
+  document.getElementById('btnResetVault').addEventListener('click', function(){
+    if(confirm('This will permanently erase your saved matrix data from this device. Continue?')){
+      clearVault();
+      initScreen();
+    }
+  });
+
+  document.getElementById('btnReset2').addEventListener('click', function(){
+    if(confirm('This will permanently erase your saved matrix data from this device. Continue?')){
+      clearVault();
+      stopLiveTimer();
+      dashboard.classList.add('hidden');
+      vaultScreen.classList.remove('hidden');
+      initScreen();
+    }
+  });
+
+  document.getElementById('btnLock').addEventListener('click', function(){
+    stopLiveTimer();
+    dashboard.classList.add('hidden');
+    vaultScreen.classList.remove('hidden');
+    initScreen();
+  });
+
+  // ---------- LAUNCH DASHBOARD ----------
+  function launchDashboard(data){
+    try{
+      vaultScreen.classList.add('hidden');
+      dashboard.classList.remove('hidden');
+
+      document.getElementById('profileName').textContent = data.name;
+      const birth = new Date(data.dob);
+
+      if(isNaN(birth.getTime())){
+        console.error('ChronoX: invalid birth date value ->', data.dob);
+        alert('জন্মতারিখ পড়া যাচ্ছে না। দয়া করে আবার সিলেক্ট করুন।');
+        return;
       }
-    } else {
-      showSetupScreen();
+
+      document.getElementById('profileBday').textContent = birth.toLocaleString(undefined, {
+        year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit'
+      });
+
+      const z = getZodiac(birth);
+      document.getElementById('profileZodiac').textContent = z.glyph + ' ' + z.name;
+      document.getElementById('zodiacGlyphBig').textContent = z.glyph;
+      document.getElementById('statZodiacName').textContent = z.name + ' ' + z.glyph;
+      document.getElementById('statZodiacDates').textContent = z.range;
+
+      const moon = getMoonPhase(birth);
+      document.getElementById('statMoon').textContent = moon.name;
+      document.getElementById('moonEmoji').textContent = moon.emoji;
+
+      renderWisdom();
+      startLiveTimer(birth);
+    }catch(err){
+      console.error('ChronoX launchDashboard error:', err);
     }
   }
 
-  function showSetupScreen() {
-    vaultScreen.classList.remove('hidden');
-    dashboard.classList.add('hidden');
-    setupForm.classList.remove('hidden');
-    unlockForm.classList.add('hidden');
-    vaultTitle.textContent = "Initialize Your Matrix";
-    vaultDesc.textContent = "Enter your identity and birth coordinates to generate your lifetime matrix. Secure it locally with a ChronoKey PIN.";
-  }
-
-  function showUnlockScreen() {
-    vaultScreen.classList.remove('hidden');
-    dashboard.classList.add('hidden');
-    setupForm.classList.add('hidden');
-    unlockForm.classList.remove('hidden');
-    vaultTitle.textContent = "ChronoKey Required";
-    vaultDesc.textContent = `Welcome back, Agent ${userData.name}. Enter your PIN to unlock your matrix coordinates.`;
-  }
-
-  document.getElementById('btnInitialize').addEventListener('click', () => {
-    setupError.textContent = "";
-    const name = inputName.value.trim();
-    const dob = inputDob.value;
-    const pin = inputPin.value.trim();
-
-    if (!name) { setupError.textContent = "Please enter a Callsign / Name."; return; }
-    if (!dob) { setupError.textContent = "Please select a valid Birth Date & Time."; return; }
-    if (!pin || pin.length < 4) { setupError.textContent = "PIN must be 4–6 digits."; return; }
-
-    userData = { name, dob, pin };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(userData));
-    unlockDashboard();
-  });
-
-  document.getElementById('btnUnlock').addEventListener('click', () => {
-    unlockError.textContent = "";
-    const enteredPin = inputUnlockPin.value.trim();
-    if (enteredPin === userData.pin) {
-      inputUnlockPin.value = "";
-      unlockDashboard();
-    } else {
-      unlockError.textContent = "Invalid ChronoKey PIN. Access Denied.";
+  // ---------- ZODIAC ----------
+  function getZodiac(date){
+    const m = date.getMonth()+1, d = date.getDate();
+    const signs = [
+      {name:'Capricorn', glyph:'♑', range:'Dec 22 – Jan 19', start:[12,22], end:[1,19]},
+      {name:'Aquarius', glyph:'♒', range:'Jan 20 – Feb 18', start:[1,20], end:[2,18]},
+      {name:'Pisces', glyph:'♓', range:'Feb 19 – Mar 20', start:[2,19], end:[3,20]},
+      {name:'Aries', glyph:'♈', range:'Mar 21 – Apr 19', start:[3,21], end:[4,19]},
+      {name:'Taurus', glyph:'♉', range:'Apr 20 – May 20', start:[4,20], end:[5,20]},
+      {name:'Gemini', glyph:'♊', range:'May 21 – Jun 20', start:[5,21], end:[6,20]},
+      {name:'Cancer', glyph:'♋', range:'Jun 21 – Jul 22', start:[6,21], end:[7,22]},
+      {name:'Leo', glyph:'♌', range:'Jul 23 – Aug 22', start:[7,23], end:[8,22]},
+      {name:'Virgo', glyph:'♍', range:'Aug 23 – Sep 22', start:[8,23], end:[9,22]},
+      {name:'Libra', glyph:'♎', range:'Sep 23 – Oct 22', start:[9,23], end:[10,22]},
+      {name:'Scorpio', glyph:'♏', range:'Oct 23 – Nov 21', start:[10,23], end:[11,21]},
+      {name:'Sagittarius', glyph:'♐', range:'Nov 22 – Dec 21', start:[11,22], end:[12,21]}
+    ];
+    for(const s of signs){
+      const [sm, sd] = s.start, [em, ed] = s.end;
+      if(sm === em){
+        if(m === sm && d >= sd && d <= ed) return s;
+      } else {
+        if((m === sm && d >= sd) || (m === em && d <= ed)) return s;
+      }
     }
-  });
-
-  document.getElementById('btnResetVault').addEventListener('click', resetAll);
-  document.getElementById('btnResetAll').addEventListener('click', resetAll);
-
-  document.getElementById('btnRelock').addEventListener('click', () => {
-    if (timerInterval) clearInterval(timerInterval);
-    showUnlockScreen();
-    showToast("Matrix Relocked Successfully");
-  });
-
-  document.getElementById('btnShareStats').addEventListener('click', shareStats);
-
-  function resetAll() {
-    if (confirm("Are you sure you want to reset your matrix vault data?")) {
-      if (timerInterval) clearInterval(timerInterval);
-      localStorage.removeItem(STORAGE_KEY);
-      userData = null;
-      inputName.value = "";
-      inputDob.value = "";
-      inputPin.value = "";
-      inputUnlockPin.value = "";
-      showSetupScreen();
-      showToast("Vault Reset Complete");
-    }
+    return signs[0];
   }
 
-  function unlockDashboard() {
-    vaultScreen.classList.add('hidden');
-    dashboard.classList.remove('hidden');
-
-    dispName.textContent = userData.name;
-    const birthDate = new Date(userData.dob);
-    
-    const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-    dispBday.textContent = birthDate.toLocaleDateString(undefined, options);
-
-    const zodiac = getZodiacSign(birthDate.getMonth() + 1, birthDate.getDate());
-    zodiacText.textContent = `${zodiac.symbol} ${zodiac.name}`;
-
-    const moon = getMoonPhase(birthDate);
-    statMoonIcon.textContent = moon.icon;
-    statMoonName.textContent = moon.name;
-
-    updateEngine();
-    if (timerInterval) clearInterval(timerInterval);
-    timerInterval = setInterval(updateEngine, 1000);
-
-    showToast(`Matrix Online: Welcome ${userData.name}`);
+  // ---------- MOON PHASE ----------
+  function getMoonPhase(date){
+    const phases = [
+      {name:'New Moon', emoji:'🌑'},
+      {name:'Waxing Crescent', emoji:'🌒'},
+      {name:'First Quarter', emoji:'🌓'},
+      {name:'Waxing Gibbous', emoji:'🌔'},
+      {name:'Full Moon', emoji:'🌕'},
+      {name:'Waning Gibbous', emoji:'🌖'},
+      {name:'Last Quarter', emoji:'🌗'},
+      {name:'Waning Crescent', emoji:'🌘'}
+    ];
+    const synodic = 29.530588853;
+    const knownNewMoon = new Date(Date.UTC(2000,0,6,18,14,0)).getTime();
+    const diffDays = (date.getTime() - knownNewMoon) / 86400000;
+    let phase = (diffDays % synodic) / synodic;
+    if(phase < 0) phase += 1;
+    const index = Math.floor(phase * 8 + 0.5) % 8;
+    return phases[index];
   }
 
-  function updateEngine() {
+  // ---------- DAILY WISDOM ----------
+  const wisdomQuotes = [
+    "You are not counting down. You are counting up — every second adds to what you've already built.",
+    "The universe took 13.8 billion years to make this exact moment. Don't waste it scrolling.",
+    "Your atoms were forged in dying stars. Act like it.",
+    "Time isn't running out. It's simply running through you.",
+    "Every heartbeat is a tiny rebellion against entropy.",
+    "You've survived 100% of your worst days. The math is in your favor.",
+    "The clock doesn't care about your excuses — but it does reward your consistency.",
+    "You are the universe, briefly organized enough to ask what it's doing here.",
+    "Growth is just time you didn't waste being afraid.",
+    "Today is a rare alignment of atoms that will never happen again in this configuration.",
+    "The future isn't waiting for you. It's already becoming the past — move.",
+    "You're not behind schedule. There was never a universal schedule to begin with.",
+    "Small consistent motion beats sudden bursts of ambition. Ask any planet.",
+    "The version of you a year from now is being built in this exact second.",
+    "Stars die so elements can exist. You exist so something new can be built.",
+    "Nothing about your existence was guaranteed. Everything about your next move is yours.",
+    "You are simultaneously ancient stardust and brand-new possibility.",
+    "Discipline is just love letters to your future self.",
+    "The present moment is the only currency that never depreciates.",
+    "You don't find time. You make decisions about where it goes.",
+    "Rest is not the opposite of progress — it's part of the algorithm.",
+    "Every orbit you complete around the sun is proof you kept choosing to continue.",
+    "Comparison is a corrupted timestamp. Your timeline is uniquely yours.",
+    "The cosmos doesn't rush, yet everything gets accomplished. Take notes.",
+    "You are a temporary pattern the universe is still deciding to keep.",
+    "Momentum compounds quietly before it becomes undeniable.",
+    "Your potential doesn't expire — but your excuses have a shelf life.",
+    "Every second you hesitate is a second the version of you who didn't hesitate is already living in.",
+    "The Big Bang started with nothing and became everything. So can today.",
+    "You're not late. You're exactly as far along as someone who kept going would be.",
+    "Legacy isn't built in decades. It's built in the seconds you decide to show up."
+  ];
+
+  function dayOfYear(d){
+    const start = new Date(d.getFullYear(), 0, 0);
+    const diff = d - start;
+    return Math.floor(diff / 86400000);
+  }
+
+  function renderWisdom(){
     const now = new Date();
-    const birth = new Date(userData.dob);
-    const diffMs = now - birth;
+    const idx = dayOfYear(now) % wisdomQuotes.length;
+    document.getElementById('wisdomText').textContent = wisdomQuotes[idx];
+    document.getElementById('wisdomDate').textContent = 'Transmission for ' + now.toLocaleDateString(undefined,{weekday:'long', year:'numeric', month:'long', day:'numeric'});
+  }
 
-    if (diffMs < 0) return;
+  // ---------- LIVE TIMER / ALL CALCULATIONS ----------
+  function pad(n){ return n.toString().padStart(2,'0'); }
 
+  function calendarDiff(birth, now){
     let years = now.getFullYear() - birth.getFullYear();
     let months = now.getMonth() - birth.getMonth();
     let days = now.getDate() - birth.getDate();
@@ -1116,138 +1135,190 @@
     let minutes = now.getMinutes() - birth.getMinutes();
     let seconds = now.getSeconds() - birth.getSeconds();
 
-    if (seconds < 0) { seconds += 60; minutes--; }
-    if (minutes < 0) { minutes += 60; hours--; }
-    if (hours < 0) { hours += 24; days--; }
-    if (days < 0) {
-      const prevMonthLastDay = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
-      days += prevMonthLastDay;
+    if(seconds < 0){ seconds += 60; minutes--; }
+    if(minutes < 0){ minutes += 60; hours--; }
+    if(hours < 0){ hours += 24; days--; }
+    if(days < 0){
+      const prevMonthDate = new Date(now.getFullYear(), now.getMonth(), 0);
+      days += prevMonthDate.getDate();
       months--;
     }
-    if (months < 0) { months += 12; years--; }
+    if(months < 0){ months += 12; years--; }
+    return {years, months, days, hours, minutes, seconds};
+  }
 
-    tickYears.textContent = String(years).padStart(2, '0');
-    tickMonths.textContent = String(months).padStart(2, '0');
-    tickDays.textContent = String(days).padStart(2, '0');
-    tickHours.textContent = String(hours).padStart(2, '0');
-    tickMins.textContent = String(minutes).padStart(2, '0');
-    tickSecs.textContent = String(seconds).padStart(2, '0');
-
-    const totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-    const totalWeeks = Math.floor(totalDays / 7);
-    const totalHours = Math.floor(diffMs / (1000 * 60 * 60));
-    const heartbeats = Math.floor((diffMs / 1000) * (80 / 60));
-
-    statTotalDays.textContent = totalDays.toLocaleString();
-    statTotalWeeks.textContent = totalWeeks.toLocaleString();
-    statTotalHours.textContent = totalHours.toLocaleString();
-    statHeartbeats.textContent = heartbeats.toLocaleString();
-
-    const marsAge = (totalDays / 686.98).toFixed(2);
-    const jupiterAge = (totalDays / (365.25 * 11.862)).toFixed(2);
-    const distanceKm = Math.floor(totalHours * 107000);
-
-    statMars.textContent = marsAge;
-    statJupiter.textContent = jupiterAge;
-    statDistance.textContent = (distanceKm / 1e6).toFixed(1) + "M km";
-
-    const startOfYear = new Date(now.getFullYear(), 0, 1);
-    const endOfYear = new Date(now.getFullYear() + 1, 0, 1);
-    const yearPct = ((now - startOfYear) / (endOfYear - startOfYear)) * 100;
-    yearProgressPct.textContent = yearPct.toFixed(1) + "%";
-    yearProgressBar.style.width = yearPct.toFixed(1) + "%";
-
-    let nextBday = new Date(now.getFullYear(), birth.getMonth(), birth.getDate(), birth.getHours(), birth.getMinutes());
-    if (now > nextBday) {
-      nextBday.setFullYear(now.getFullYear() + 1);
+  function nextBirthday(birth, now){
+    let next = new Date(now.getFullYear(), birth.getMonth(), birth.getDate(), birth.getHours(), birth.getMinutes(), birth.getSeconds());
+    if(next.getTime() <= now.getTime()){
+      next = new Date(now.getFullYear()+1, birth.getMonth(), birth.getDate(), birth.getHours(), birth.getMinutes(), birth.getSeconds());
     }
-    const nextAge = nextBday.getFullYear() - birth.getFullYear();
-    bdayTurningText.textContent = `Turning ${nextAge}`;
-
-    const cdDiff = nextBday - now;
-    const cDays = Math.floor(cdDiff / (1000 * 60 * 60 * 24));
-    const cHours = Math.floor((cdDiff / (1000 * 60 * 60)) % 24);
-    const cMins = Math.floor((cdDiff / 1000 / 60) % 60);
-    const cSecs = Math.floor((cdDiff / 1000) % 60);
-
-    cdDays.textContent = String(cDays).padStart(2, '0');
-    cdHours.textContent = String(cHours).padStart(2, '0');
-    cdMins.textContent = String(cMins).padStart(2, '0');
-    cdSecs.textContent = String(cSecs).padStart(2, '0');
+    return next;
   }
 
-  function getZodiacSign(month, day) {
-    const zodiacs = [
-      { name: "Capricorn", symbol: "♑", end: 19 },
-      { name: "Aquarius", symbol: "♒", end: 18 },
-      { name: "Pisces", symbol: "♓", end: 20 },
-      { name: "Aries", symbol: "♈", end: 19 },
-      { name: "Taurus", symbol: "♉", end: 20 },
-      { name: "Gemini", symbol: "♊", end: 20 },
-      { name: "Cancer", symbol: "♋", end: 22 },
-      { name: "Leo", symbol: "♌", end: 22 },
-      { name: "Virgo", symbol: "♍", end: 22 },
-      { name: "Libra", symbol: "♎", end: 22 },
-      { name: "Scorpio", symbol: "♏", end: 21 },
-      { name: "Sagittarius", symbol: "♐", end: 21 },
-      { name: "Capricorn", symbol: "♑", end: 31 }
-    ];
-    return day <= zodiacs[month - 1].end ? zodiacs[month - 1] : zodiacs[month];
+  let cachedShareData = null;
+
+  function startLiveTimer(birth){
+    stopLiveTimer();
+    function tick(){
+     try{
+      const now = new Date();
+      const ageMs = now.getTime() - birth.getTime();
+      const ageSeconds = ageMs / 1000;
+      const totalDays = Math.floor(ageMs / 86400000);
+      const totalWeeks = (totalDays / 7);
+      const totalHours = (ageMs / 3600000);
+      const totalMinutes = (ageMs / 60000);
+      const heartbeats = totalMinutes * 80;
+
+      const cd = calendarDiff(birth, now);
+      document.getElementById('tYears').textContent = cd.years;
+      document.getElementById('tMonths').textContent = cd.months;
+      document.getElementById('tDays').textContent = cd.days;
+      document.getElementById('tHours').textContent = pad(cd.hours);
+      document.getElementById('tMinutes').textContent = pad(cd.minutes);
+      document.getElementById('tSeconds').textContent = pad(cd.seconds);
+
+      document.getElementById('statDays').textContent = totalDays.toLocaleString();
+      document.getElementById('statWeeks').textContent = Math.floor(totalWeeks).toLocaleString();
+      document.getElementById('statHours').textContent = Math.floor(totalHours).toLocaleString();
+      document.getElementById('statHeartbeats').textContent = Math.floor(heartbeats).toLocaleString();
+
+      // Planetary years
+      const marsYearDays = 686.98;
+      const jupiterYearDays = 4332.59;
+      const ageEarthDays = ageMs / 86400000;
+      const marsAge = ageEarthDays / marsYearDays;
+      const jupiterAge = ageEarthDays / jupiterYearDays;
+      document.getElementById('statMars').textContent = marsAge.toFixed(2);
+      document.getElementById('statJupiter').textContent = jupiterAge.toFixed(2);
+
+      // Distance traveled (Earth's solar orbit speed ~107,218 km/h)
+      const orbitSpeedKmH = 107218;
+      const distanceKm = totalHours * orbitSpeedKmH;
+      document.getElementById('statDistance').textContent = Math.floor(distanceKm).toLocaleString() + ' km';
+
+      // Combined universe journey (solar orbit + solar system's drift through the galaxy ~828,000 km/h)
+      const galacticSpeedKmH = 828000;
+      const galacticDistanceKm = totalHours * galacticSpeedKmH;
+      const combinedKm = distanceKm + galacticDistanceKm;
+      document.getElementById('statUniverseSummary').textContent = formatBigNumber(combinedKm) + ' km';
+
+      // Year completed %
+      const yearStart = new Date(now.getFullYear(), 0, 1);
+      const yearEnd = new Date(now.getFullYear()+1, 0, 1);
+      const yearPct = ((now - yearStart) / (yearEnd - yearStart)) * 100;
+      document.getElementById('yearPct').textContent = yearPct.toFixed(1) + '%';
+      document.getElementById('yearFill').style.width = yearPct.toFixed(2) + '%';
+      document.getElementById('yearSub').textContent = now.getFullYear() + ' is ' + yearPct.toFixed(1) + '% complete.';
+
+      // Next birthday countdown
+      const nb = nextBirthday(birth, now);
+      const diffMs = nb.getTime() - now.getTime();
+      const bdD = Math.floor(diffMs / 86400000);
+      const bdH = Math.floor((diffMs % 86400000) / 3600000);
+      const bdM = Math.floor((diffMs % 3600000) / 60000);
+      const bdS = Math.floor((diffMs % 60000) / 1000);
+      document.getElementById('bdD').textContent = bdD;
+      document.getElementById('bdH').textContent = pad(bdH);
+      document.getElementById('bdM').textContent = pad(bdM);
+      document.getElementById('bdS').textContent = pad(bdS);
+      document.getElementById('bdayDaysLeft').textContent = bdD + 'd';
+
+      // 10,000 days milestone
+      const milestoneTarget = 10000;
+      let milestonePct, milestoneSub;
+      if(totalDays < milestoneTarget){
+        milestonePct = (totalDays / milestoneTarget) * 100;
+        milestoneSub = (milestoneTarget - totalDays).toLocaleString() + ' days remaining until 10,000 days alive.';
+      } else {
+        milestonePct = 100;
+        milestoneSub = 'Milestone reached ' + (totalDays - milestoneTarget).toLocaleString() + ' days ago. Legend status.';
+      }
+      document.getElementById('milestonePct').textContent = milestonePct.toFixed(1) + '%';
+      document.getElementById('milestoneFill').style.width = Math.min(milestonePct,100).toFixed(2) + '%';
+      document.getElementById('milestoneSub').textContent = milestoneSub;
+
+      cachedShareData = {
+        name: document.getElementById('profileName').textContent,
+        years: cd.years, months: cd.months, days: cd.days,
+        totalDays: totalDays,
+        totalHours: Math.floor(totalHours),
+        heartbeats: Math.floor(heartbeats),
+        marsAge: marsAge.toFixed(2),
+        jupiterAge: jupiterAge.toFixed(2),
+        distanceKm: Math.floor(distanceKm),
+        zodiac: document.getElementById('statZodiacName').textContent,
+        moon: document.getElementById('statMoon').textContent,
+        yearPct: yearPct.toFixed(1),
+        bdayDaysLeft: bdD
+      };
+     }catch(err){
+      console.error('ChronoX tick error:', err);
+     }
+    }
+    tick();
+    liveTimer = setInterval(tick, 1000);
   }
 
-  function getMoonPhase(date) {
-    let year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-    if (month < 3) { year--; month += 12; }
-    let c = 3.6525 * year;
-    let e = 30.6 * month;
-    let jd = c + e + day - 694039.09; 
-    jd /= 29.5305882; 
-    let b = parseInt(jd);
-    jd -= b; 
-    let phase = Math.round(jd * 8); 
-    if (phase >= 8) phase = 0;
-
-    const phases = [
-      { name: "New Moon", icon: "🌑" },
-      { name: "Waxing Crescent", icon: "🌒" },
-      { name: "First Quarter", icon: "🌓" },
-      { name: "Waxing Gibbous", icon: "🌔" },
-      { name: "Full Moon", icon: "🌕" },
-      { name: "Waning Crescent", icon: "🌘" },
-      { name: "Last Quarter", icon: "🌗" },
-      { name: "Waning Crescent", icon: "🌘" }
-    ];
-    return phases[phase];
+  function stopLiveTimer(){
+    if(liveTimer){ clearInterval(liveTimer); liveTimer = null; }
   }
 
-  function shareStats() {
-    if (!userData) return;
-    const text = `⚡ ChronoX Matrix Stats for ${userData.name} ⚡\n` +
-      `• Earth Age: ${tickYears.textContent}Y ${tickMonths.textContent}M ${tickDays.textContent}D\n` +
-      `• Total Days Lived: ${statTotalDays.textContent}\n` +
-      `• Estimated Heartbeats: ${statHeartbeats.textContent}\n` +
-      `• Mars Age: ${statMars.textContent} years\n` +
-      `• Zodiac: ${zodiacText.textContent}\n` +
-      `• Space Traveled: ${statDistance.textContent}\n\n` +
-      `Generated by ChronoX: Lifetime Matrix Engine`;
-
-    navigator.clipboard.writeText(text).then(() => {
-      showToast("Matrix Stats Copied to Clipboard!");
-    }).catch(() => {
-      showToast("Failed to Copy Stats");
-    });
+  function formatBigNumber(n){
+    if(n >= 1e9) return (n/1e9).toFixed(2) + 'B';
+    if(n >= 1e6) return (n/1e6).toFixed(2) + 'M';
+    return Math.floor(n).toLocaleString();
   }
 
-  function showToast(msg) {
-    toastMsg.textContent = msg;
-    toast.classList.add('show');
-    setTimeout(() => {
-      toast.classList.remove('show');
-    }, 3000);
+  // ---------- SHARE ----------
+  document.getElementById('btnShare').addEventListener('click', function(){
+    if(!cachedShareData) return;
+    const d = cachedShareData;
+    const text =
+`⚡ CHRONOX LIFETIME MATRIX — ${d.name}
+━━━━━━━━━━━━━━━━━━━━━
+🕐 Age: ${d.years}y ${d.months}m ${d.days}d
+📆 Total Days Lived: ${d.totalDays.toLocaleString()}
+⏱️ Total Hours Lived: ${d.totalHours.toLocaleString()}
+💓 Estimated Heartbeats: ${d.heartbeats.toLocaleString()}
+🔴 Age on Mars: ${d.marsAge} Mars-years
+🟠 Age on Jupiter: ${d.jupiterAge} Jupiter-years
+🌌 Space Traveled: ${d.distanceKm.toLocaleString()} km
+${d.zodiac} · Birth Moon: ${d.moon}
+📈 ${new Date().getFullYear()} completed: ${d.yearPct}%
+🎂 Next birthday in: ${d.bdayDaysLeft} days
+━━━━━━━━━━━━━━━━━━━━━
+Generated by ChronoX: Lifetime Matrix Engine`;
+
+    function showToast(){
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(()=> toast.classList.remove('show'), 2600);
+    }
+
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(showToast).catch(function(){
+        fallbackCopy(text);
+        showToast();
+      });
+    } else {
+      fallbackCopy(text);
+      showToast();
+    }
+  });
+
+  function fallbackCopy(text){
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try{ document.execCommand('copy'); }catch(e){}
+    document.body.removeChild(ta);
   }
+
+})();
 </script>
-
 </body>
 </html>
