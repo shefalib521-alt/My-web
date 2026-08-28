@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="ChronoX - একটি নির্ভুল বয়স হিসাব করার ওয়েবসাইট। লাইভ টাইমার, হার্টবিট এবং বিভিন্ন গ্রহের হিসেবে আপনার বয়স জানুন।">
+<meta name="keywords" content="ChronoX, বয়স হিসাব করার ওয়েবসাইট, age calculator bangla, live age tracker, জন্মতারিখ হিসাব">
 <title>ChronoX: Lifetime Matrix Engine</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -359,32 +361,12 @@
     text-align:center;
     gap:14px;
   }
-  .avatar-frame{
-    width:118px; height:118px;
-    border-radius:32px;
-    padding:4px;
-    background:conic-gradient(from 0deg, var(--cyan), var(--violet), var(--sky), var(--cyan));
-    animation:frameSpin 6s linear infinite;
-    box-shadow:0 0 30px rgba(43,233,233,0.25);
-  }
-  @keyframes frameSpin{ to{ filter:hue-rotate(360deg); } }
-  .avatar-frame-inner{
-    width:100%; height:100%;
-    border-radius:28px;
-    overflow:hidden;
-    background:#0a0a10;
-  }
-  .avatar-frame-inner img{
-    width:100%; height:100%;
-    object-fit:cover;
-    display:block;
-  }
   .profile-name{
     font-family:var(--font-head);
-    font-size:19px;
+    font-size:21px;
     font-weight:700;
     letter-spacing:0.02em;
-    margin-top:4px;
+    margin-top:2px;
   }
   .profile-zodiac{
     font-family:var(--font-mono);
@@ -735,12 +717,6 @@
     <div class="top-row">
       <!-- PROFILE CARD -->
       <div class="profile-card panel">
-        <div class="avatar-frame">
-          <div class="avatar-frame-inner">
-            <!-- INSERT YOUR PERSONAL PHOTO URL HERE -->
-            <img id="avatarImg" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400" alt="User avatar">
-          </div>
-        </div>
         <div class="profile-name" id="profileName">—</div>
         <div class="profile-zodiac" id="profileZodiac">♈ —</div>
         <div class="profile-bday" id="profileBday">—</div>
