@@ -40,13 +40,12 @@ def generate_article(topic):
     res = requests.post(url, headers=headers, json=data)
     if res.status_code == 200:
         return res.json()["choices"][0]["message"]["content"]
-    else
+    else:
         raise Exception(f"Groq API Error: {res.text}")
 
 def publish_to_github(topic, content):
     tz = pytz.timezone("Asia/Dhaka")
     now = datetime.now(tz)
-    date_str = now.strftime("%Y-%m-%d")
     filename = f"posts/{now.strftime('%Y%m%d_%H%M%S')}.md"
     
     url = f"https://api.github.com/repos/{GH_OWNER}/{GH_REPO}/contents/{filename}"
@@ -75,4 +74,5 @@ def main():
     publish_to_github(topic, content)
 
 if __name__ == "__main__":
-    mai
+    main()
+    
