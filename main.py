@@ -4,16 +4,19 @@
 # Each run:
 #   1. picks a random category + topic + hook style
 #   2. generates an SEO-friendly Bengali article with Groq (quality-validated)
-#   3. commits posts/YYYYMMDD_HHMMSS.md (with front matter and featured image)
-#   4. rebuilds sitemap.xml and rss.xml in the repository root
+#   3. searches YouTube for a relevant embeddable video (optional, fails gracefully)
+#   4. commits posts/YYYYMMDD_HHMMSS.md (front matter, cover image, embedded video)
+#   5. rebuilds sitemap.xml and rss.xml in the repository root
 #
 # Required env vars : GROQ_API_KEY, GH_TOKEN, GH_OWNER, GH_REPO
+# Recommended       : YOUTUBE_API_KEY (if missing, the post is published without a video)
 # Optional env vars : GH_BRANCH, SITE_URL, SITE_TITLE, SITE_DESCRIPTION,
 #                     POST_EXT (default .html), POST_LAYOUT,
 #                     BLOG_TOPIC, BLOG_CATEGORY (1-6)
 # Only dependency   : requests. No input() anywhere, so it is safe in CI.
 
 import base64
+import html
 import json
 import os
 import random
@@ -38,6 +41,8 @@ GROQ_MODELS_URL = "https://api.groq.com/openai/v1/models"
 GROQ_CHAT_URL = "https://api.groq.com/openai/v1/chat/completions"
 GITHUB_API = "https://api.github.com"
 IMAGE_API = "https://image.pollinations.ai/prompt/"
+YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
+YOUTUBE_VIDEOS_URL = "https://www.googleapis.com/youtube/v3/videos"
 
 PREFERRED_MODELS = [
     "llama-3.3-70b-versatile",
@@ -64,7 +69,7 @@ DEFAULT_SITE_DESCRIPTION = "প্রতিদিন নতুন নতুন �
 CATEGORIES = [
     {
         "name": "বিজ্ঞান ও আগামী দিনের প্রযুক্তি",
-        "tone": "Curious, inspiring and forward-looking. Precise but simple. Make the reader feel the future is close.",
+        "tone": "Curious, inspiring and forward-looking with a touch of sci-fi wonder. Precise but simple. Make the reader feel the future is close.",
         "image_hint": "futuristic science technology laboratory space",
         "topics": [
             "কোয়ান্টাম কম্পিউটার: যে যন্ত্র একসঙ্গে অনেক সম্ভাবনা নিয়ে ভাবতে পারে",
@@ -200,6 +205,7 @@ def load_config():
             "Missing required environment variable(s): " + ", ".join(missing)
             + ". Add them as GitHub Secrets and pass them in the workflow 'env:' block."
         )
+    values["YOUTUBE_API_KEY"] = os.environ.get("YOUTUBE_API_KEY", "").strip()
     values["GH_BRANCH"] = os.environ.get("GH_BRANCH", "").strip()
     values["SITE_URL"] = os.environ.get("SITE_URL", "").strip()
     values["SITE_TITLE"] = os.environ.get("SITE_TITLE", "").strip() or DEFAULT_SITE_TITLE
@@ -332,6 +338,8 @@ def build_user_prompt(category, topic, angle):
         "4 to 6 Bengali SEO keywords separated by commas.",
         "[[IMAGE_PROMPT]]",
         "8 to 14 ENGLISH words describing a stunning cover photo for this topic (no text, no faces).",
+        "[[VIDEO_QUERY]]",
+        "3 to 6 ENGLISH keywords to find a good, safe, educational YouTube video about this exact topic.",
         "[[ARTICLE]]",
         "The full article in Markdown, following the structure below.",
         "[[END]]",
@@ -342,18 +350,18 @@ def build_user_prompt(category, topic, angle):
         "3. '## এক নজরে দ্রুত তথ্য' followed by a Markdown table: header row '| বিষয় | তথ্য |',",
         "   separator row '|---|---|', then 4 to 6 data rows with real, accurate facts.",
         "4. Three or four body sections, each starting with an H2 line '## ' with an intriguing title.",
-        "   Use '### ' subheadings where helpful, **bold** highlights and bullet points starting with '- '.",
+        "   Use at least two '### ' subheadings, **bold** highlights and bullet points starting with '- '.",
         "   Include at least one real-life analogy or example from daily life in Bangladesh.",
-        "5. '## উপসংহার': a short memorable closing plus one thought-provoking question for the reader.",
-        "6. '## সচরাচর জিজ্ঞাসা (FAQ)': 3 or 4 questions, each as an H3 line '### question?'",
-        "   followed by a 1 to 3 sentence answer.",
+        "5. '## উপসংহার ও মূল শিক্ষা': a short memorable closing paragraph, then 3 or 4 bullet takeaways",
+        "   starting with '- ', then one thought-provoking question for the reader.",
+        "A YouTube video will be inserted automatically before the conclusion. Do not add any video, link or iframe yourself.",
         "",
         "Writing rules:",
         "- Length: 800 to 1200 words of natural, fluent Bengali.",
         "- Sound like a human storyteller. Short sentences mixed with longer ones. Concrete details.",
         "- Explain every technical term simply. No empty filler and no repeated sentences.",
         "- Safe and suitable for readers of all ages.",
-        "- Use the exact headings given above for the quick facts, conclusion and FAQ sections.",
+        "- Use the exact headings given above for the quick facts and conclusion sections.",
         "- No emojis. Do not wrap anything in code fences. No text outside the markers.",
     ]
     return "\n".join(lines)
@@ -417,12 +425,10 @@ def validate_article(text):
         return False, "missing quick facts section"
     if not has_heading(text, "উপসংহার"):
         return False, "missing conclusion section"
-    if not has_heading(text, "সচরাচর জিজ্ঞাসা|FAQ"):
-        return False, "missing FAQ section"
     if len(re.findall(r"^## ", text, flags=re.M)) < 5:
         return False, "fewer than 5 H2 sections"
-    if len(re.findall(r"^### ", text, flags=re.M)) < 3:
-        return False, "fewer than 3 H3 headings (FAQ questions)"
+    if len(re.findall(r"^### ", text, flags=re.M)) < 2:
+        return False, "fewer than 2 H3 subheadings"
     table_lines = [x for x in text.splitlines() if x.strip().startswith("|")]
     separator = re.search(r"^\s*\|?\s*:?-{2,}:?\s*\|", text, flags=re.M)
     if len(table_lines) < 5 or not separator:
@@ -481,17 +487,3 @@ def build_meta(parsed, article, category):
     tags = []
     for t in re.split(r"[,\u060C\u3001\n]", parsed.get("TAGS", "")):
         t = t.strip().strip("#*-\"' ")
-        if t and len(t) <= 40 and t not in tags:
-            tags.append(t)
-    tags = tags[:6]
-    if not tags:
-        tags = [category["name"]]
-    prompt = re.sub(r"[^A-Za-z0-9 ,.\-]", " ", parsed.get("IMAGE_PROMPT", ""))
-    prompt = re.sub(r"\s+", " ", prompt).strip()[:160]
-    if len(prompt) < 10:
-        prompt = category["image_hint"]
-    return {"title": title, "description": description, "tags": tags, "image_prompt": prompt}
-
-
-# ----------------------------------------------------------------------
-# Groq:
